@@ -1,1 +1,513 @@
+/* =========================
+   BASIC
+========================= */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #08070b;
+    color: #eee8e4;
+    font-family: "Cormorant Garamond", serif;
+    overflow-x: hidden;
+}
+
+section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+
+/* =========================
+   STARS
+========================= */
+
+.stars,
+.stars::before,
+.stars::after {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stars::before {
+    content: "";
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,.5) 1px, transparent 1px);
+    background-size: 110px 110px, 170px 170px;
+    background-position: 20px 30px, 70px 90px;
+    opacity: .35;
+    animation: starsMove 18s linear infinite;
+}
+
+@keyframes starsMove {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100px);
+    }
+}
+
+
+/* =========================
+   OPENING
+========================= */
+
+.opening {
+    min-height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(126, 96, 120, .18), transparent 35%),
+        linear-gradient(180deg, #09080d, #100c14 70%, #08070b);
+}
+
+.opening-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+    animation: openingFade 2s ease forwards;
+}
+
+@keyframes openingFade {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.small-line {
+    font-size: 14px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    opacity: .6;
+    margin-bottom: 30px;
+}
+
+.opening h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(65px, 10vw, 125px);
+    font-weight: 500;
+    line-height: .9;
+    margin-bottom: 35px;
+}
+
+.opening h1 span {
+    display: inline-block;
+    font-size: 1.05em;
+}
+
+.opening-text {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.opening-subtext {
+    max-width: 650px;
+    margin: auto;
+    font-size: 20px;
+    line-height: 1.8;
+    opacity: .75;
+}
+
+.memory-button {
+    display: inline-block;
+    margin-top: 45px;
+    padding: 14px 28px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 50px;
+    color: #eee8e4;
+    text-decoration: none;
+    font-family: "Dancing Script", cursive;
+    font-size: 22px;
+    transition: .4s ease;
+    background: rgba(255,255,255,.03);
+}
+
+.memory-button:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.6);
+}
+
+
+/* =========================
+   MOON
+========================= */
+
+.moon {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    top: 12%;
+    right: 8%;
+    background: #eee6df;
+    opacity: .06;
+    filter: blur(1px);
+    box-shadow: 0 0 80px rgba(255,255,255,.15);
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.intro {
+    flex-direction: column;
+    text-align: center;
+    background:
+        linear-gradient(180deg, #08070b, #110c13, #08070b);
+}
+
+.section-label,
+.memory-label {
+    font-family: "Dancing Script", cursive;
+    font-size: 22px;
+    opacity: .6;
+    margin-bottom: 18px;
+}
+
+.intro h2,
+.emotional-section h2,
+.two-years h2 {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(48px, 7vw, 90px);
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.intro > p:not(.section-label):not(.handwritten) {
+    max-width: 720px;
+    font-size: 23px;
+    line-height: 1.8;
+    opacity: .78;
+}
+
+.handwritten {
+    font-family: "Dancing Script", cursive;
+    font-size: 29px !important;
+    opacity: .85 !important;
+    margin-top: 30px;
+}
+
+
+/* =========================
+   MEMORY SECTIONS
+========================= */
+
+.memory-section {
+    flex-direction: column;
+    background:
+        radial-gradient(circle at 30% 40%, rgba(100, 70, 90, .13), transparent 35%),
+        #08070b;
+}
+
+.memory-section.alternate {
+    background:
+        radial-gradient(circle at 70% 50%, rgba(110, 80, 100, .14), transparent 35%),
+        #0d0a10;
+}
+
+.memory-date {
+    font-family: "Dancing Script", cursive;
+    font-size: 28px;
+    opacity: .5;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
+}
+
+.memory-card {
+    width: min(850px, 92%);
+    padding: 60px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.025);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 25px 80px rgba(0,0,0,.3);
+    border-radius: 4px;
+}
+
+.memory-card h2 {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(45px, 6vw, 75px);
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.memory-card p:not(.memory-label):not(.quote):not(.handwritten) {
+    font-size: 22px;
+    line-height: 1.8;
+    opacity: .76;
+    margin-bottom: 20px;
+}
+
+.quote {
+    font-family: "Dancing Script", cursive;
+    font-size: 28px;
+    line-height: 1.5;
+    margin: 35px 0;
+    opacity: .9;
+}
+
+
+/* =========================
+   PHOTO PLACEHOLDER
+========================= */
+
+.photo-placeholder {
+    width: 100%;
+    height: 400px;
+    margin-top: 35px;
+    border: 1px dashed rgba(255,255,255,.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(135deg,
+        rgba(255,255,255,.025),
+        rgba(255,255,255,.005));
+    color: rgba(255,255,255,.35);
+    font-family: "Dancing Script", cursive;
+    font-size: 24px;
+    position: relative;
+}
+
+.photo-placeholder::before {
+    content: "✦";
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    opacity: .4;
+}
+
+
+/* =========================
+   EMOTIONAL SECTION
+========================= */
+
+.emotional-section {
+    flex-direction: column;
+    text-align: center;
+    background:
+        radial-gradient(circle, rgba(120, 80, 110, .14), transparent 45%),
+        #0b080e;
+}
+
+.emotional-section > p:not(.section-label):not(.handwritten) {
+    max-width: 650px;
+    font-size: 22px;
+    line-height: 1.8;
+    opacity: .75;
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   TWO YEARS
+========================= */
+
+.two-years {
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at center, rgba(130, 90, 120, .18), transparent 45%),
+        #09070c;
+}
+
+.big-number {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(180px, 35vw, 430px);
+    line-height: .7;
+    opacity: .09;
+    position: absolute;
+    z-index: 0;
+}
+
+.two-years h2,
+.two-years .section-label,
+.two-years .years-text {
+    position: relative;
+    z-index: 2;
+}
+
+.years-text {
+    max-width: 650px;
+    font-size: 23px;
+    line-height: 1.8;
+    opacity: .75;
+}
+
+
+/* =========================
+   LETTER
+========================= */
+
+.letter-section {
+    background:
+        radial-gradient(circle at center, rgba(100, 70, 90, .12), transparent 45%),
+        #08070b;
+}
+
+.envelope {
+    width: min(850px, 92%);
+    padding: 20px;
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 30px 100px rgba(0,0,0,.45);
+}
+
+.letter {
+    padding: 65px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(245,238,230,.035);
+}
+
+.letter-small {
+    font-family: "Dancing Script", cursive;
+    font-size: 22px;
+    opacity: .5;
+    margin-bottom: 25px;
+}
+
+.letter h2 {
+    font-family: "Dancing Script", cursive;
+    font-size: 60px;
+    font-weight: 500;
+    margin-bottom: 35px;
+}
+
+.letter p {
+    font-size: 21px;
+    line-height: 1.9;
+    opacity: .78;
+    margin-bottom: 22px;
+}
+
+.letter .signature {
+    font-family: "Dancing Script", cursive;
+    font-size: 32px;
+    margin-top: 45px;
+    opacity: .9;
+}
+
+
+/* =========================
+   ENDING
+========================= */
+
+.ending {
+    flex-direction: column;
+    text-align: center;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at center, rgba(130, 90, 120, .18), transparent 45%),
+        linear-gradient(180deg, #08070b, #120c15);
+}
+
+.ending-small {
+    letter-spacing: 5px;
+    font-size: 14px;
+    opacity: .5;
+    margin-bottom: 30px;
+}
+
+.ending h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(70px, 11vw, 140px);
+    font-weight: 500;
+    line-height: .85;
+    margin-bottom: 45px;
+}
+
+.ending h1 span {
+    display: block;
+}
+
+.ending > p:not(.ending-small):not(.handwritten) {
+    max-width: 600px;
+    font-size: 22px;
+    line-height: 1.8;
+    opacity: .7;
+}
+
+.final-line {
+    margin-top: 55px;
+    font-family: "Dancing Script", cursive;
+    font-size: 35px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    section {
+        padding: 80px 16px;
+    }
+
+    .opening h1 {
+        font-size: 68px;
+    }
+
+    .opening-text {
+        font-size: 24px;
+    }
+
+    .opening-subtext {
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    .memory-card {
+        padding: 35px 25px;
+    }
+
+    .memory-card p:not(.memory-label):not(.quote):not(.handwritten) {
+        font-size: 19px;
+    }
+
+    .photo-placeholder {
+        height: 280px;
+    }
+
+    .letter {
+        padding: 35px 25px;
+    }
+
+    .letter h2 {
+        font-size: 48px;
+    }
+
+    .letter p {
+        font-size: 19px;
+    }
+
+    .moon {
+        width: 150px;
+        height: 150px;
+        right: -30px;
+    }
+}
