@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Little Secret</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: #08070b;
+            color: #eee8e4;
+            font-family: "Cormorant Garamond", serif;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           SECRET SCREEN
+        ========================== */
+
+        .secret-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(125, 92, 120, 0.18),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    145deg,
+                    #08070b,
+                    #100b13,
+                    #070609
+                );
+        }
+
+        .secret-screen::before,
+        .secret-screen::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow:
+                10vw 12vh white,
+                22vw 70vh rgba(255,255,255,.6),
+                35vw 22vh rgba(255,255,255,.8),
+                48vw 82vh rgba(255,255,255,.5),
+                62vw 15vh white,
+                76vw 68vh rgba(255,255,255,.7),
+                90vw 30vh rgba(255,255,255,.5),
+                84vw 88vh white,
+                15vw 90vh rgba(255,255,255,.5);
+            opacity: .55;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        .secret-screen::after {
+            animation-delay: 2s;
+            transform: scale(.7);
+        }
+
+        @keyframes twinkle {
+            from {
+                opacity: .2;
+            }
+
+            to {
+                opacity: .8;
+            }
+        }
+
+        .secret-content {
+            width: min(520px, 100%);
+            position: relative;
+            z-index: 2;
+            animation: appear 1.5s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tiny-star {
+            font-size: 18px;
+            opacity: .6;
+            margin-bottom: 25px;
+            letter-spacing: 8px;
+        }
+
+        .secret-content h1 {
+            font-family: "Dancing Script", cursive;
+            font-size: clamp(48px, 11vw, 75px);
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: 22px;
+        }
+
+        .secret-content .intro-text {
+            font-size: 21px;
+            line-height: 1.7;
+            opacity: .68;
+            margin-bottom: 35px;
+        }
+
+        .secret-content .hint {
+            font-family: "Dancing Script", cursive;
+            font-size: 22px;
+            opacity: .8;
+            margin-bottom: 12px;
+        }
+
+        .code-box {
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .code-box input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.22);
+            color: white;
+            outline: none;
+            text-align: center;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 19px;
+            letter-spacing: 3px;
+            transition: .3s ease;
+        }
+
+        .code-box input:focus {
+            border-color: rgba(255,255,255,.6);
+            box-shadow: 0 0 25px rgba(180,140,170,.12);
+        }
+
+        .enter-button {
+            margin-top: 18px;
+            padding: 13px 30px;
+            border: 1px solid rgba(255,255,255,.3);
+            background: rgba(255,255,255,.04);
+            color: #eee8e4;
+            font-family: "Dancing Script", cursive;
+            font-size: 22px;
+            cursor: pointer;
+            transition: .35s ease;
+        }
+
+        .enter-button:hover {
+            background: rgba(255,255,255,.1);
+            transform: translateY(-3px);
+        }
+
+        .error {
+            min-height: 25px;
+            margin-top: 15px;
+            color: #d9a8b8;
+            font-size: 17px;
+            opacity: 0;
+            transition: .3s ease;
+        }
+
+        .error.show {
+            opacity: 1;
+        }
+
+        /* =========================
+           ANNIVERSARY PAGE
+        ========================== */
+
+        .anniversary-page {
+            display: none;
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(125, 92, 120, .16),
+                    transparent 40%
+                ),
+                #08070b;
+        }
+
+        .anniversary-page.open {
+            display: block;
+            animation: pageReveal 1.5s ease;
+        }
+
+        @keyframes pageReveal {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .opening {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .opening-content {
+            max-width: 800px;
+        }
+
+        .date {
+            font-size: 14px;
+            letter-spacing: 5px;
+            opacity: .5;
+            margin-bottom: 30px;
+        }
+
+        .opening h2 {
+            font-family: "Dancing Script", cursive;
+            font-size: clamp(65px, 12vw, 120px);
+            font-weight: 500;
+            line-height: .9;
+            margin-bottom: 30px;
+        }
+
+        .opening h2 span {
+            display: block;
+        }
+
+        .opening p {
+            font-size: 24px;
+            line-height: 1.7;
+            opacity: .7;
+        }
+
+        .scroll-note {
+            margin-top: 55px;
+            font-family: "Dancing Script", cursive;
+            font-size: 21px;
+            opacity: .6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         SECRET ENTRY
+    ========================== -->
+
+    <section class="secret-screen" id="secretScreen">
+
+        <div class="secret-content">
+
+            <div class="tiny-star">
+                ✦ &nbsp; ✦ &nbsp; ✦
+            </div>
+
+            <h1>
+                Our little secret
+            </h1>
+
+            <p class="intro-text">
+                There is a little world hidden here...
+                <br>
+                and it's only meant for you.
+            </p>
+
+            <p class="hint">
+                You know the code. ♡
+            </p>
+
+            <div class="code-box">
+
+                <input
+                    type="password"
+                    id="secretCode"
+                    placeholder="enter the secret code"
+                    autocomplete="off"
+                >
+
+                <button
+                    class="enter-button"
+                    onclick="openOurStory()"
+                >
+                    enter our world ♡
+                </button>
+
+                <p class="error" id="errorMessage">
+                    Hmm... that's not our secret. Try again. ♡
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ANNIVERSARY WEBSITE
+    ========================== -->
+
+    <main class="anniversary-page" id="anniversaryPage">
+
+        <section class="opening">
+
+            <div class="opening-content">
+
+                <p class="date">
+                    30 SEPTEMBER 2026
+                </p>
+
+                <h2>
+                    Happy Anniversary,
+                    <span>Kunnu</span>
+                </h2>
+
+                <p>
+                    Can you believe it's been two years?
+                </p>
+
+                <p class="scroll-note">
+                    But before we celebrate these two years...
+                    <br>
+                    let's go back. ♡
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        function openOurStory() {
+
+            const enteredCode =
+                document.getElementById("secretCode").value.trim();
+
+            const correctCode = "KUNNU2024";
+
+            const errorMessage =
+                document.getElementById("errorMessage");
+
+            const secretScreen =
+                document.getElementById("secretScreen");
+
+            const anniversaryPage =
+                document.getElementById("anniversaryPage");
+
+
+            if (enteredCode.toUpperCase() === correctCode) {
+
+                errorMessage.classList.remove("show");
+
+                secretScreen.style.display = "none";
+
+                anniversaryPage.classList.add("open");
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "instant"
+                });
+
+            } else {
+
+                errorMessage.classList.add("show");
+
+            }
+        }
+
+
+        document
+            .getElementById("secretCode")
+            .addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+                    openOurStory();
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>
